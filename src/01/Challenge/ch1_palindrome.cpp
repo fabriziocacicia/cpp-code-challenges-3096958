@@ -5,7 +5,6 @@
 // Examples: civic, radar, level.
 
 #include <iostream>
-#include <cstring>
 
 // is_palindrome()
 // Summary: This function receives a string and returns true if the string is a palindrome, false otherwise.
