@@ -17,8 +17,16 @@
 bool sort_array(int *arr, int n){
 
     // Write your code here
-
-    return false;
+    for(int i = 0; i < n; i++) {
+        for(int j = i + 1; j < n; j++) {
+            if(arr[i] > arr[j]) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
+    return true;
 }
 
 // Main function
