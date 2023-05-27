@@ -5,7 +5,7 @@
 // Examples: civic, radar, level.
 
 #include <iostream>
-#include <algorithm>
+#include <cstring>
 
 // is_palindrome()
 // Summary: This function receives a string and returns true if the string is a palindrome, false otherwise.
@@ -14,9 +14,14 @@
 // Returns: A boolean value. True for palindromes, false otherwise.
 bool is_palindrome(std::string str){
 
-    // Write your code here
-
-    return false;
+    // Write your code here 
+    int strlen = str.length();
+    for(int i = 0; i < strlen; i++) {
+        if(tolower(str[i]) != tolower(str[strlen - i - 1])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // Main function
