@@ -16,6 +16,22 @@ int main(){
     std::cin >> n;
 
     // Write your code here
+    for(int i = 1; i < n + 1; i++) {
+        std::string to_print = "";
+        if(i % 3 == 0 && i > 3) {
+            to_print.append("Buzz");
+        }
+
+        if(i % 5 == 0 && i > 5) {
+            to_print.append("Fizz");
+        }
+
+        if(to_print.length() == 0) {
+            to_print = std::to_string(i);
+        }
+
+        std::cout << to_print;
+    }
     
     std::cout << std::endl << std::flush;
     return 0;
