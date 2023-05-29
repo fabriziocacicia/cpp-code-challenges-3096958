@@ -44,5 +44,5 @@ complex_num complex_num::operator /(complex_num w){
 void complex_num::print(std::ostream &os){
     // Write your code here
     
-    std::cout << real << " " << (imag < 0 ? "-" : "+ ") << "i" << abs(imag);
+    os << real << " " << (imag < 0 ? "-" : "+ ") << "i" << abs(imag);
 }
