@@ -6,6 +6,9 @@
 class complex_num{
     
     // Write your code here
+    private:
+        int real;
+        int imag;
 
     public:
          complex_num(double = 0.0, double = 0.0);
