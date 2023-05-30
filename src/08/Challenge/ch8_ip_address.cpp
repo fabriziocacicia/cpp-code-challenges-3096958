@@ -18,8 +18,43 @@
 bool is_valid_ip(std::string ip){
 
     // Write your code here
+    std::vector<std::string> parts;
+    std::string part = "";
 
-    return false;
+    // Add a dot at the end to store a part into parts after every dot
+    ip += '.';
+    for(int i = 0; i < ip.length(); i++) {
+        if(ip[i] != '.') {
+            // If there is some character that is not a number the IP is not valid
+            // Subtrating the '0' char means converting the integer value of the character int its actual numeric value
+            if(ip[i] - '0' < 0 || ip[i] - '0' > 9) {
+                return false;
+            }
+
+            part += ip[i];
+        } else {
+            parts.push_back(part);
+            part = "";
+        }
+    }
+
+    bool is_valid = true;
+
+    // If the IP is not made by 4 parts is not valid
+    if(parts.size() != 4) {
+        return false;
+    }
+
+    for(auto & p : parts) {
+        int num = stoi(p);
+
+        if(num < 0 || num > 255) {
+            return false;
+        }
+    }
+
+
+    return is_valid;
 }
 
 // Main function
