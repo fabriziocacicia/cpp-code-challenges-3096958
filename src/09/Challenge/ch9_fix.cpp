@@ -34,7 +34,7 @@ int vowel_count(const std::string str){
 int main(){
     std::string input; 
     std::cout << "Enter some text: " << std::flush;
-    std::cin >> input;
+    std::getline(std::cin, input);
     std::cout << "\nThe text you entered contains " << vowel_count(input) << " vowels.\n\n";
 }
  
