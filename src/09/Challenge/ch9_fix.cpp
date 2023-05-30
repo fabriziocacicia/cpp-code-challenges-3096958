@@ -18,7 +18,7 @@
 int vowel_count(const std::string str){
     int count=0;
     for(int i = 0; i<str.length(); i++)
-        switch(str[i]){
+        switch(tolower(str[i])){
             case 'a':
             case 'e':
             case 'i':
