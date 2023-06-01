@@ -34,14 +34,54 @@ void ask_for_move(char game[][3], char mark){
 //           mark: The AI's mark: 'X' or 'O'.
 // Returns: Nothing.
 
-#define DUMMY_AI
+#define DOUBLER_AI
 void make_move(char game[][3], char mark){ 
     #ifdef TWO_PLAYERS
     ask_for_move(game,mark);
     #else
     
     // Write your code here and comment out the definition of TWO_PLAYERS above
-    #ifdef DUMMY_AI
+    for(int row = 0; row < 3; row++) {
+        for(int col = 0; col < 3; col++) {
+            if(game[row][col] == mark) {
+                if(col + 1 < 3 && game[row][col + 1] == ' ') {
+                    game[row][col + 1] = mark;
+                    return;
+                }
+
+                if(row + 1 < 3 && game[row + 1][col] == ' ') {
+                    game[row + 1][col] = mark;
+                    return;
+                }
+            }
+        }
+    }
+
+    if(game[0][0] == mark) {
+        if(game[1][1] == ' ') {
+            game[1][1] = mark;
+            return;
+        }
+    }
+
+    if(game[1][1] == mark) {
+        if(game[2][2] == ' ') {
+            game[2][2] = mark;
+            return;
+        }
+
+        if(game[3][1] == ' ') {
+            game[3][1] = mark;
+        }
+    }
+
+    if(game[1][3] == mark) {
+        if(game[1][1] == ' ') {
+            game[1][1] = mark;
+            return;
+        }
+    }
+
     for(int row = 0; row < 3; row++) {
         for(int col = 0; col < 3; col++) {
             if(game[row][col] == ' ') {
@@ -50,10 +90,6 @@ void make_move(char game[][3], char mark){
             }
         }
     }
-    #else
-
-    #endif
-
     #endif
     return;
 }
