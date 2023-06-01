@@ -34,14 +34,62 @@ void ask_for_move(char game[][3], char mark){
 //           mark: The AI's mark: 'X' or 'O'.
 // Returns: Nothing.
 
-#define TWO_PLAYERS
+#define DOUBLER_AI
 void make_move(char game[][3], char mark){ 
     #ifdef TWO_PLAYERS
     ask_for_move(game,mark);
     #else
     
     // Write your code here and comment out the definition of TWO_PLAYERS above
+    for(int row = 0; row < 3; row++) {
+        for(int col = 0; col < 3; col++) {
+            if(game[row][col] == mark) {
+                if(col + 1 < 3 && game[row][col + 1] == ' ') {
+                    game[row][col + 1] = mark;
+                    return;
+                }
 
+                if(row + 1 < 3 && game[row + 1][col] == ' ') {
+                    game[row + 1][col] = mark;
+                    return;
+                }
+            }
+        }
+    }
+
+    if(game[0][0] == mark) {
+        if(game[1][1] == ' ') {
+            game[1][1] = mark;
+            return;
+        }
+    }
+
+    if(game[1][1] == mark) {
+        if(game[2][2] == ' ') {
+            game[2][2] = mark;
+            return;
+        }
+
+        if(game[3][1] == ' ') {
+            game[3][1] = mark;
+        }
+    }
+
+    if(game[1][3] == mark) {
+        if(game[1][1] == ' ') {
+            game[1][1] = mark;
+            return;
+        }
+    }
+
+    for(int row = 0; row < 3; row++) {
+        for(int col = 0; col < 3; col++) {
+            if(game[row][col] == ' ') {
+                game[row][col] = mark;
+                return;
+            }
+        }
+    }
     #endif
     return;
 }
@@ -58,8 +106,41 @@ void make_move(char game[][3], char mark){
 char game_state(char game[][3]){
 
     // Write your code here
+    // Checks rows and cols
+    for(int i = 0; i < 3; i++) {
+        // Checks rows
+         if(game[i][0] != ' ' && game[i][0] == game[i][1] && game[i][1] == game[i][2]) {
+            return game[i][0];
+        }
 
-    return 'a';
+        // Checks cols
+        if(game[0][i] != ' ' && game[0][i] == game[1][i] && game[1][i] == game[2][i]) {
+            return game[0][i];
+        }
+    }
+
+    // Checks diags
+    if(game[1][1] != ' ') {
+        if(game[0][0] == game[1][1] && game[1][1] == game[2][2]) {
+            return game[1][1];
+        }
+
+        if(game[0][2] == game[1][1] && game[1][1] == game[2][0]) {
+            return game[1][1];
+        }
+    }
+
+    // No winner yet. If there are empty cells the game is still active
+    for(int row = 0; row < 3; row++) {
+        for(int col = 0; col < 3; col++) {
+            if(game[row][col] == ' ') {
+                return 'a';
+            }
+        }
+    }
+
+    // No winner and no empty cells: tie
+    return 't';
 }
 
 // print_game()
