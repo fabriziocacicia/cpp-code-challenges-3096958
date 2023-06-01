@@ -17,9 +17,11 @@
 int main(){
     std::fstream file ("names.csv", std::ios::in);
     // Read the CSV file.
+    std::string line;
     if(file.is_open()){
 
         // Write your code here
+        getline(file, line);
     
         file.close();
     }
@@ -29,6 +31,28 @@ int main(){
     }
 
     // Write your code here
+    std::vector<std::vector<std::string>> people;
+
+    std::stringstream ssLine(line);
+    std::string person;
+
+    while(getline(ssLine, person, ',')) {
+        std::stringstream ssPerson(person);
+        std::string s;
+        std::vector<std::string> personNames;
+        while(getline(ssPerson, s, ' ')) {
+            personNames.push_back(s);
+        }
+
+        for(auto & p : people) {
+            if(p[1] == personNames[1]) {
+                std::cout << personNames[0] << " " << personNames[1] << " could be relative to " << p[0] << " " << p[1] << "\n" << std::flush;
+                return 0;
+            }
+        }
+
+        people.push_back(personNames);
+    }
 
     std::cout << "No relatives found.\n\n" << std::flush;    
     return 0;
