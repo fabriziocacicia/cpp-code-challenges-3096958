@@ -30,6 +30,40 @@ int main(){
     do{
 
         // Write your code here
+        const int wait_delay = 4 + (rand() % 7);
+        const auto wait_delay_in_seconds = std::chrono::seconds(wait_delay);
+
+        const auto waiting_start_time = std::chrono::steady_clock::now();
+        while(std::chrono::steady_clock::now() - waiting_start_time < wait_delay_in_seconds) {
+            continue;
+        }
+        
+        const int WRITING_DELAY = 2;
+        const auto writing_delay_in_seconds = std::chrono::seconds(WRITING_DELAY);
+        const auto writing_start_time = std::chrono::steady_clock::now();
+
+        std::cout << "Type a 3-letter word: \n" << std::flush;
+        std::string word;
+        std::getline(std::cin, word);
+
+        const bool fast_enough = std::chrono::steady_clock::now() - writing_start_time < writing_delay_in_seconds;
+
+        // Make the word uppercase
+        for(int i = 0; i < word.length(); i++) {
+            word[i] = toupper(word[i]);
+        }
+        
+        const bool correct_word = std::find(begin(words), end(words), word) != end(words);
+        
+        if(!word.empty()) {
+            if(fast_enough && correct_word) {
+                std::cout << "Success!\n" << std::flush;
+            } else {
+                std::cout << "Failure!\n" << std::flush;
+            }
+            return 0;
+        }
+        
 
         std::cout << "Try again? (Y/N): " << std::flush;
         std::getline(std::cin, try_again);
